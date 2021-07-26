@@ -3,7 +3,13 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @decorated_users = []
+
+    User.all.each do |user|
+      @decorated_users << UserDecorator.new(user) 
+    end
+
+    render json: @decorated_users, each_serializer: UserSerializer
   end
 
   # GET /users/1 or /users/1.json
@@ -21,10 +27,11 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    service = UserService.new(user_params)
+    @user = service.process
 
     respond_to do |format|
-      if @user.save
+      if @user
         format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
