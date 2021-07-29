@@ -9,4 +9,8 @@ class UserDecorator < SimpleDelegator
       "not admin"
     end
   end
+
+  def empty_method
+
+  end
 end
