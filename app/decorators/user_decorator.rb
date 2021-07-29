@@ -11,5 +11,7 @@ class UserDecorator < SimpleDelegator
   end
 
   # this is a test
-  def empty_method; end
+  def empty_method
+    # this is a test
+  end
 end
