@@ -1,0 +1,5 @@
+- repo: https://github.com/mattlqx/pre-commit-ruby
+  rev: v1.3.3
+  hooks:
+  - id: rubocop
+  - id: rspec
